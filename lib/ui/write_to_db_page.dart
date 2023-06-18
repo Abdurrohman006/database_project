@@ -4,6 +4,7 @@ import 'package:database_project/view_model/minds_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class WriteDbPage extends StatelessWidget {
   WriteDbPage({Key? key}) : super(key: key);
   TextEditingController mind = TextEditingController();
@@ -18,6 +19,7 @@ class WriteDbPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                context.read<MindsViewModel>().readMinds();
                 Navigator.push(
                     context,
                     MaterialPageRoute(

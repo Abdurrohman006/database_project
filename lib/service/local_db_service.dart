@@ -48,4 +48,25 @@ class LocalDatabase {
     var result = await db.query(tableName, columns: ["author", "mind"]);
     return result;
   }
+
+  Future updateMind(MindModel mindModel, String mind) async {
+    Database? db = await getDb();
+    var id = await db.update(
+      tableName,
+      mindModel.toJson(),
+      where: "mind = ?",
+      whereArgs: [mind],
+    );
+    print("Update bo'ldi");
+  }
+
+  Future deleteMind(String mind) async {
+    Database? db = await getDb();
+    var id = await db.delete(
+      tableName,
+      where: "mind = ?",
+      whereArgs: [mind],
+    );
+    print("delete bo'ldi: $id");
+  }
 }

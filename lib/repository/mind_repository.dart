@@ -12,4 +12,9 @@ class MindRepository {
     var result = await db!.getMinds();
     return result.map((e) => MindModel.fromJson(e)).toList();
   }
+
+  void updateMind(MindModel mindModel, String mind) async =>
+      await db!.updateMind(mindModel, mind);
+
+  void deleteMind(String mind) async => await db!.deleteMind(mind);
 }

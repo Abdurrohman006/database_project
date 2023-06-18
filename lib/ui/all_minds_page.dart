@@ -2,9 +2,16 @@ import 'package:database_project/view_model/minds_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AllMindsPage extends StatelessWidget {
+import 'widget/mind_item.dart';
+
+class AllMindsPage extends StatefulWidget {
   const AllMindsPage({Key? key}) : super(key: key);
 
+  @override
+  State<AllMindsPage> createState() => _AllMindsPageState();
+}
+
+class _AllMindsPageState extends State<AllMindsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MindsViewModel>(context);
@@ -19,7 +26,13 @@ class AllMindsPage extends StatelessWidget {
           } else if (value.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            return const Center(child: Text("data bor"));
+            return ListView.builder(
+              itemCount: value.minds!.length,
+              itemBuilder: (context, index) {
+                var mind = value.minds![index];
+                return MindItem(mind: mind);
+              },
+            );
           }
           return Container();
         },
